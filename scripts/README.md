@@ -1,0 +1,1 @@
+# DIVE 2024 - Hackathon Backend scripts
