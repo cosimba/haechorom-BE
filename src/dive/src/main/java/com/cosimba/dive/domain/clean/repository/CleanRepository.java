@@ -1,7 +1,7 @@
 package com.cosimba.dive.domain.clean.repository;
 
 import com.cosimba.dive.domain.clean.entity.Clean;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CleanRepository extends ElasticsearchRepository<Clean, String> {
+public interface CleanRepository extends JpaRepository<Clean, Long> {
 }
