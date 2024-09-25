@@ -27,10 +27,28 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.mysql:mysql-connector-j'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Spring Security (보안 및 인증)
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// JWT (토큰 기반 인증)
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'  // JSON serialization
+
+	// BCrypt for password encoding
+	implementation 'org.springframework.security:spring-security-crypto'
+
+	// Spring Boot DevTools (개발 편의성)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// 이메일 발송
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
