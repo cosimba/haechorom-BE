@@ -202,4 +202,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+scripts/docker-elk/elasticsearch/_state
+scripts/docker-elk/elasticsearch/indices
+scripts/docker-elk/elasticsearch/snapshot_cache
 # End of https://www.toptal.com/developers/gitignore/api/gradle,intellij,java,macos

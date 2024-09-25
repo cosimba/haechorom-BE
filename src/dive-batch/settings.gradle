@@ -1,0 +1,4 @@
+rootProject.name = 'dive-batch'
+
+include(":dive")
+findProject(":dive").projectDir = file("../dive")
