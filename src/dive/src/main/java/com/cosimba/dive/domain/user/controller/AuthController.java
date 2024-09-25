@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -36,9 +38,12 @@ public class AuthController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String userId, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
+        String userId = loginRequest.get("userId");
+        String password = loginRequest.get("password");
+
         String token = userService.login(userId, password);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok("로그인 성공");
     }
 
     // 아이디 찾기

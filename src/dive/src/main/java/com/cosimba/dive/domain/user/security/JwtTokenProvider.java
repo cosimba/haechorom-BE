@@ -3,11 +3,13 @@ package com.cosimba.dive.domain.user.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ import java.util.Map;
 @Component
 public class JwtTokenProvider {
 
-    private final String SECRET_KEY = "yourSecretKey";  // 비밀 키
+    private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);  // 안전한 비밀 키 생성
 
     // JWT 토큰 생성
     public String createToken(String userId, String role) {
@@ -27,9 +29,25 @@ public class JwtTokenProvider {
                 .setSubject(userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10시간 유효기간
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SECRET_KEY)  // 새로운 강력한 비밀 키 사용
                 .compact();
     }
+
+//    private final String SECRET_KEY = "yourSecretKey";  // 비밀 키
+//
+//    // JWT 토큰 생성
+//    public String createToken(String userId, String role) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("role", role);
+//
+//        return Jwts.builder()
+//                .setClaims(claims)
+//                .setSubject(userId)
+//                .setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10시간 유효기간
+//                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+//                .compact();
+//    }
 
     // 비밀번호 재설정 토큰 생성 (유효기간 짧게 설정)
     public String createPasswordResetToken(String userId) {
