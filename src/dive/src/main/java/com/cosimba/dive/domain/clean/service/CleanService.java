@@ -41,7 +41,7 @@ public class CleanService {
 
     @Transactional
     public void updateClean(Long cleanId, UpdateCleanRequest request) {
-        Clean clean = cleanRepository.findById(cleanId)
+        Clean clean = cleanRepository.findByIdAndIsDeletedIsFalse(cleanId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 청소 정보가 없습니다."));
 
         clean.update(
