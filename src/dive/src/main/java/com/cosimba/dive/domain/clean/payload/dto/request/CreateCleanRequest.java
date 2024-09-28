@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record CreateCleanRequest (
         String cleanName,
         String serialNumber,
+        Long josaId,
         LocalDateTime cleanDate,
         String coastName,
         double lat,
