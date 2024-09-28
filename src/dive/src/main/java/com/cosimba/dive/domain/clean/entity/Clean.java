@@ -28,6 +28,9 @@ public class Clean extends BaseEntity {
     @Column(name = "serial_number")
     private String serialNumber;
 
+    @Column(name = "josa_id")
+    private Long josaId;
+
     @Column(name = "clean_date")
     private LocalDateTime cleanDate;
 
@@ -53,13 +56,14 @@ public class Clean extends BaseEntity {
     @Column(name = "clean_status")
     private CleanStatus cleanStatus;
 
-    public static Clean create(String cleanName, String serialNumber, LocalDateTime cleanDate,
+    public static Clean create(String cleanName, String serialNumber, Long josaId, LocalDateTime cleanDate,
                                String coastName, double lat, double lng, Integer coastLength,
                                Integer collectBag, Integer collectVal, TrashType trashType,
                                CleanStatus cleanStatus) {
         return Clean.builder()
                 .cleanName(cleanName)
                 .serialNumber(serialNumber)
+                .josaId(josaId)
                 .cleanDate(cleanDate)
                 .coastName(coastName)
                 .lat(lat)

@@ -3,6 +3,7 @@ package com.cosimba.dive.domain.clean.service;
 import com.cosimba.dive.domain.clean.entity.Clean;
 import com.cosimba.dive.domain.clean.payload.dto.request.CreateCleanRequest;
 import com.cosimba.dive.domain.clean.payload.dto.request.UpdateCleanRequest;
+import com.cosimba.dive.domain.clean.payload.dto.response.CleanPostReponse;
 import com.cosimba.dive.domain.clean.repository.CleanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +20,10 @@ public class CleanService {
 
     @Transactional
     public void createClean(CreateCleanRequest request) {
-        log.info("청소 등록 요청: {}", request);
         Clean clean = Clean.create(
                 request.cleanName(),
                 request.serialNumber(),
+                request.josaId(),
                 request.cleanDate(),
                 request.coastName(),
                 request.lat(),
@@ -38,9 +39,9 @@ public class CleanService {
         log.info("청소 등록 완료: {}", clean);
     }
 
-    public void updateClean(UpdateCleanRequest request) {
-        log.info("청소 수정 요청: {}", request);
-        Clean clean = cleanRepository.findById(request.id())
+    @Transactional
+    public void updateClean(Long cleanId, UpdateCleanRequest request) {
+        Clean clean = cleanRepository.findByIdAndIsDeletedIsFalse(cleanId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 청소 정보가 없습니다."));
 
         clean.update(
@@ -58,5 +59,20 @@ public class CleanService {
         );
 
         log.info("청소 수정 완료: {}", clean);
+    }
+
+    public CleanPostReponse viewCleanPost(Long josaId) {
+        Clean clean = cleanRepository.findByJosaIdAndIsDeletedIsFalse(josaId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 청소 정보가 없습니다."));
+        log.info("청소 조회 완료: {}", clean);
+        return CleanPostReponse.fromEntity(clean);
+    }
+
+    @Transactional
+    public void deleteClean(Long cleanId) {
+        Clean clean = cleanRepository.findByIdAndIsDeletedIsFalse(cleanId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 청소 정보가 없습니다."));
+        clean.delete();
+        log.info("청소 삭제 완료: {}", clean);
     }
 }

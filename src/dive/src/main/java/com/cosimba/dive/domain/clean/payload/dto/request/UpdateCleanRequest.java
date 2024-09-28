@@ -6,7 +6,6 @@ import com.cosimba.dive.global.entity.TrashType;
 import java.time.LocalDateTime;
 
 public record UpdateCleanRequest(
-        Long id,
         String cleanName,
         String serialNumber,
         LocalDateTime cleanDate,
