@@ -3,8 +3,6 @@ package com.cosimba.dive.domain.user.service;
 import com.cosimba.dive.domain.user.entity.UserEntity;
 import com.cosimba.dive.domain.user.repository.UserRepository;
 import com.cosimba.dive.domain.user.security.JwtTokenProvider;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +22,7 @@ public class UserService {
     }
 
     public UserEntity register(UserEntity userEntity) {
+        // 비밀번호를 암호화하여 저장
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));  // 비밀번호 암호화
         return userRepository.save(userEntity);
     }
@@ -37,16 +36,7 @@ public class UserService {
         }
     }
 
-    public Optional<UserEntity> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
     public Optional<UserEntity> findByUserId(String userId) {
         return userRepository.findByUserId(userId);
-    }
-
-    // 사용자 정보 업데이트 (비밀번호 변경에 사용)
-    public UserEntity updateUser(UserEntity userEntity) {
-        return userRepository.save(userEntity);
     }
 }
