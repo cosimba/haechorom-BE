@@ -2,6 +2,7 @@ package com.cosimba.dive.domain.user.controller;
 
 import com.cosimba.dive.domain.user.entity.UserEntity;
 import com.cosimba.dive.domain.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +11,21 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user/auth")
 public class AuthController {
 
     private final UserService userService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
-
     // 회원가입
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserEntity userEntity) {
-        UserEntity savedUser = userService.register(userEntity);
-        return ResponseEntity.ok(savedUser);
+        try {
+            UserEntity savedUser = userService.register(userEntity);
+            return ResponseEntity.ok(savedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("중복된 아이디입니다.");
+        }
     }
 
     // 로그인
@@ -39,6 +41,13 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token) // 토큰을 Authorization 헤더에 담아 반환
                 .body("로그인 성공");
+    }
+
+    // 아이디 중복 확인
+    @GetMapping("/check/{userId}")
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable("userId") String userId) {
+        boolean isDuplicate = userService.isUserIdDuplicate(userId);
+        return ResponseEntity.ok(isDuplicate);
     }
 
     // 아이디/비밀번호 찾기는 나중에 구현
