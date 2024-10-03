@@ -117,6 +117,39 @@ CREATE TABLE clean
     CONSTRAINT pk_clean PRIMARY KEY (id)
 );
 
+CREATE TABLE user
+(
+    id       BIGINT AUTO_INCREMENT NOT NULL,
+    user_id  VARCHAR(255)          NULL,
+    password VARCHAR(255)          NULL,
+    name     VARCHAR(255)          NULL,
+    email    VARCHAR(255)          NULL,
+    ph_num   VARCHAR(255)          NULL,
+    pin      VARCHAR(255)          NULL,
+    `role`   VARCHAR(255)          NULL,
+    CONSTRAINT pk_user PRIMARY KEY (id)
+);
+
+CREATE TABLE josa
+(
+    id            BIGINT AUTO_INCREMENT NOT NULL,
+    created_at    datetime              NULL,
+    updated_at    datetime              NULL,
+    deleted_at    datetime              NULL,
+    is_deleted    BIT(1)                NOT NULL,
+    josa_name     VARCHAR(255)          NULL,
+    serial_number VARCHAR(255)          NULL,
+    josa_date     datetime              NULL,
+    coast_name    VARCHAR(255)          NULL,
+    lat           DOUBLE                NOT NULL,
+    lng           DOUBLE                NOT NULL,
+    coast_length  INT                   NULL,
+    collect_bag   INT                   NULL,
+    trash_type    SMALLINT              NULL,
+    josa_status   SMALLINT              NULL,
+    CONSTRAINT pk_josa PRIMARY KEY (id)
+);
+
 CREATE TABLE aggregated_result
 (
     id              BIGINT AUTO_INCREMENT NOT NULL,
