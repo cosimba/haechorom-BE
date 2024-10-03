@@ -1,5 +1,6 @@
 package com.cosimba.dive.domain.josa.controller;
 
+import com.cosimba.dive.domain.josa.entity.Josa;
 import com.cosimba.dive.domain.josa.payload.dto.request.CreateJosaRequest;
 import com.cosimba.dive.domain.josa.payload.dto.request.UpdateJosaRequest;
 import com.cosimba.dive.domain.josa.payload.dto.response.JosaPostResponse;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -39,6 +42,13 @@ public class JosaController {
         return ResponseEntity.ok(
                 josaService.viewJosaPost(id)
         );
+    }
+
+    // 모든 is_deleted = false 조사 내역 조회
+    @GetMapping("/search/all")
+    public ResponseEntity<List<Josa>> getAllActiveJosas() {
+        List<Josa> activeJosas = josaService.findAllActiveJosas();
+        return ResponseEntity.ok(activeJosas);
     }
 
     // 조사 삭제

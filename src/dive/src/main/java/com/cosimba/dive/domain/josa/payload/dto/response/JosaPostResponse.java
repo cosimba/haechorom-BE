@@ -20,7 +20,7 @@ public class JosaPostResponse {
     private double lat;
     private double lng;
     private Integer coastLength;
-    private Integer predictVal;
+    private Integer collectBag;
     private TrashType trashType;
     private JosaStatus josaStatus;
 
@@ -35,7 +35,7 @@ public class JosaPostResponse {
                 .lat(josa.getLat())
                 .lng(josa.getLng())
                 .coastLength(josa.getCoastLength())
-                .predictVal(josa.getCollectBag())
+                .collectBag(josa.getCollectBag())
                 .trashType(josa.getTrashType())
                 .josaStatus(josa.getJosaStatus())
                 .build();
