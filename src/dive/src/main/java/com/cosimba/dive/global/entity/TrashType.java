@@ -1,6 +1,7 @@
 package com.cosimba.dive.global.entity;
 
 public enum TrashType {
+    VOID("미분류"),
     FISHING_NET("폐어구류"),
     BUOY("부표류"),
     DAILY_TRASH("생활쓰레기류"),
