@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -65,6 +67,11 @@ public class JosaService { // 실제 비즈니스 로직을 담당
                 .orElseThrow(() -> new IllegalArgumentException("해당 조사 정보가 없습니다."));
         log.info("조사 조회 완료: {}", josa);
         return JosaPostResponse.fromEntity(josa);
+    }
+
+    // 모든 is_deleted = false 인 조사 내역 조회
+    public List<Josa> findAllActiveJosas() {
+        return josaRepository.findAllByIsDeletedIsFalse();
     }
 
     // 조사 정보 삭제
