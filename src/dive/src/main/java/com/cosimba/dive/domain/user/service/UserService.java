@@ -42,6 +42,16 @@ public class UserService {
         return userRepository.findByUserId(userId).isPresent();
     }
 
+    // 사용자 역할 가져오기
+    public String getRole(String userId) {
+        Optional<UserEntity> user = userRepository.findByUserId(userId);
+        if (user.isPresent()) {
+            return user.get().getRole();  // UserEntity 의 role 필드를 반환
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
     public Optional<UserEntity> findByUserId(String userId) {
         return userRepository.findByUserId(userId);
     }

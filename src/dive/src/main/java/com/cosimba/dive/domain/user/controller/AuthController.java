@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -34,13 +35,17 @@ public class AuthController {
         String userId = loginRequest.get("userId");
         String password = loginRequest.get("password");
 
+        // 로그인 성공 시 JWT 토큰 생성
         String token = userService.login(userId, password);
-//        return ResponseEntity.ok("Bearer " + token);
+        String role = userService.getRole(userId); // 사용자 역할 가져오기
 
-        // 헤더에 토큰 추가
-        return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token) // 토큰을 Authorization 헤더에 담아 반환
-                .body("로그인 성공");
+        // LoginResponse 객체에 토큰과 역할 담기
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("token", token);
+        responseBody.put("role", role);  // 역할을 같이 보내줌
+
+        // 토큰 및 역할을 응답에 담아 전달
+        return ResponseEntity.ok(responseBody); // 토큰과 역할을 함께 전달
     }
 
     // 아이디 중복 확인
