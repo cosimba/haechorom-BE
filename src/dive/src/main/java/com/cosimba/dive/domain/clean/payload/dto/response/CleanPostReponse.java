@@ -29,7 +29,7 @@ public class CleanPostReponse {
         return CleanPostReponse.builder()
                 .id(clean.getId())
                 .cleanName(clean.getCleanName())
-                .serialNumber(clean.getSerialNumber())
+                .serialNumber(clean.getSerialNum())
                 .cleanDate(clean.getCleanDate())
                 .coastName(clean.getCoastName())
                 .lat(clean.getLat())

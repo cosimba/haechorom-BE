@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface CleanRepository extends JpaRepository<Clean, Long> {
     Optional<Clean> findByJosaIdAndIsDeletedIsFalse(Long josaId);
     Optional<Clean> findByIdAndIsDeletedIsFalse(Long Id);
+
+
 }

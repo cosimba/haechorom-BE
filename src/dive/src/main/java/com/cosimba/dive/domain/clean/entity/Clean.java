@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @Entity
+@Table(name = "clean")
 public class Clean extends BaseEntity {
 
     @Id
@@ -25,8 +26,8 @@ public class Clean extends BaseEntity {
     @Column(name = "clean_name")
     private String cleanName;
 
-    @Column(name = "serial_number")
-    private String serialNumber;
+    @Column(name = "serial_num")
+    private String serialNum;
 
     @Column(name = "josa_id")
     private Long josaId;
@@ -56,13 +57,13 @@ public class Clean extends BaseEntity {
     @Column(name = "clean_status")
     private CleanStatus cleanStatus;
 
-    public static Clean create(String cleanName, String serialNumber, Long josaId, LocalDateTime cleanDate,
+    public static Clean create(String cleanName, String serialNum, Long josaId, LocalDateTime cleanDate,
                                String coastName, double lat, double lng, Integer coastLength,
                                Integer collectBag, Integer collectVal, TrashType trashType,
                                CleanStatus cleanStatus) {
         return Clean.builder()
                 .cleanName(cleanName)
-                .serialNumber(serialNumber)
+                .serialNum(serialNum)
                 .josaId(josaId)
                 .cleanDate(cleanDate)
                 .coastName(coastName)
@@ -76,9 +77,9 @@ public class Clean extends BaseEntity {
                 .build();
     }
 
-    public void update(String cleanName, String serialNumber, LocalDateTime cleanDate, String coastName, double lat, double lng, Integer coastLength, Integer collectBag, Integer collectVal, TrashType trashType, CleanStatus cleanStatus) {
+    public void update(String cleanName, String serialNum, LocalDateTime cleanDate, String coastName, double lat, double lng, Integer coastLength, Integer collectBag, Integer collectVal, TrashType trashType, CleanStatus cleanStatus) {
         this.cleanName = cleanName;
-        this.serialNumber = serialNumber;
+        this.serialNum = serialNum;
         this.cleanDate = cleanDate;
         this.coastName = coastName;
         this.lat = lat;

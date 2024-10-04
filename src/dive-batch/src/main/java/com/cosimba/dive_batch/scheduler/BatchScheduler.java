@@ -32,7 +32,7 @@ public class BatchScheduler {
 //    public void runJob() {
 //        String time = LocalDateTime.now().toString();
 //        try {
-//            Job job = jobRegistry.getJob("testJob"); // job 이름
+//            Job job = jobRegistry.getJob("calculateAveragesJob"); // job 이름
 //            JobParametersBuilder jobParam = new JobParametersBuilder().addString("time", time);
 //            jobLauncher.run(job, jobParam.toJobParameters());
 //        } catch (NoSuchJobException | JobInstanceAlreadyCompleteException | JobExecutionAlreadyRunningException |
@@ -40,4 +40,16 @@ public class BatchScheduler {
 //            throw new RuntimeException(e);
 //        }
 //    }
+    @Scheduled(cron = "0 0 0 * * *") // 매일 0시(자정)에 실행
+    public void runJob() {
+        String time = LocalDateTime.now().toString();
+        try {
+            Job job = jobRegistry.getJob("calculateAveragesJob"); // job 이름
+            JobParametersBuilder jobParam = new JobParametersBuilder().addString("time", time);
+            jobLauncher.run(job, jobParam.toJobParameters());
+        } catch (NoSuchJobException | JobInstanceAlreadyCompleteException | JobExecutionAlreadyRunningException |
+                 JobParametersInvalidException | JobRestartException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

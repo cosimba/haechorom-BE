@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: dive
   main:
     allow-bean-definition-overriding: true
   datasource:
@@ -14,8 +12,8 @@ spring:
         show_sql: true
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
-    hibernate:
-      ddl-auto: create-drop
+#    hibernate:
+#      ddl-auto: create-drop
   mail:
     host: smtp.naver.com
     port: 587
@@ -29,3 +27,6 @@ spring:
             enable: true
             required: true
         default-encoding: UTF-8
+logging:
+  level:
+    org.hibernate: DEBUG
