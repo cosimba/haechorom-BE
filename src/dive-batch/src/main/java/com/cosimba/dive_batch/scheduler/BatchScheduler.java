@@ -40,6 +40,7 @@ public class BatchScheduler {
 //            throw new RuntimeException(e);
 //        }
 //    }
+
     @Scheduled(cron = "0 0 0 * * *") // 매일 0시(자정)에 실행
     public void runJob() {
         String time = LocalDateTime.now().toString();

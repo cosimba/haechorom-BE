@@ -97,23 +97,25 @@ INSERT INTO BATCH_JOB_SEQ (ID, UNIQUE_KEY) select * from (select 0 as ID, '0' as
 
 CREATE TABLE clean
 (
-    id            BIGINT AUTO_INCREMENT NOT NULL,
-    created_at    datetime              NULL,
-    updated_at    datetime              NULL,
-    deleted_at    datetime              NULL,
-    is_deleted    BIT(1)                NOT NULL,
-    clean_name    VARCHAR(255)          NULL,
-    serial_num VARCHAR(255)          NULL,
-    josa_id       BIGINT                NULL,
-    clean_date    datetime              NULL,
-    coast_name    VARCHAR(255)          NULL,
-    lat           DOUBLE                NOT NULL,
-    lng           DOUBLE                NOT NULL,
-    coast_length  INT                   NULL,
-    collect_bag   INT                   NULL,
-    collect_val   INT                   NULL,
-    trash_type    SMALLINT              NULL,
-    clean_status  SMALLINT              NULL,
+    id           BIGINT AUTO_INCREMENT NOT NULL,
+    created_at   datetime              NULL,
+    updated_at   datetime              NULL,
+    deleted_at   datetime              NULL,
+    is_deleted   BIT(1)                NOT NULL,
+    clean_name   VARCHAR(255)          NULL,
+    serial_num   VARCHAR(255)          NULL,
+    josa_id      BIGINT                NULL,
+    clean_date   datetime              NULL,
+    coast_name   VARCHAR(255)          NULL,
+    lat          DOUBLE                NOT NULL,
+    lng          DOUBLE                NOT NULL,
+    fore_img     VARCHAR(255)          NULL,
+    clean_img    VARCHAR(255)          NULL,
+    coast_length INT                   NULL,
+    collect_bag  INT                   NULL,
+    collect_val  INT                   NULL,
+    trash_type   SMALLINT              NULL,
+    clean_status SMALLINT              NULL,
     CONSTRAINT pk_clean PRIMARY KEY (id)
 );
 
@@ -163,10 +165,18 @@ CREATE TABLE aggregated_result
     CONSTRAINT pk_aggregatedresult PRIMARY KEY (id)
 );
 
-LOAD DATA INFILE '/var/lib/mysql-files/data.csv'
+LOAD DATA INFILE '/var/lib/mysql-files/data-1.csv'
 INTO TABLE clean
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(clean_name, serial_num, clean_date, coast_name, lat, lng, coast_length, collect_bag, collect_val, trash_type, clean_status);
+(clean_name,serial_num,clean_date,coast_name,lat,lng,coast_length,collect_bag,collect_val,trash_type,clean_status,josa_id);
+
+LOAD DATA INFILE '/var/lib/mysql-files/data-2.csv'
+INTO TABLE josa
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(josa_name,serial_number,josa_date,coast_name,lat,lng,coast_length,collect_bag,trash_type,josa_status);

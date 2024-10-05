@@ -3,22 +3,22 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: dive
-    password: dive
-    url: jdbc:mysql://localhost:3306/dive?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOSTNAME}/dive?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=Asia/Seoul
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
-#    hibernate:
-#      ddl-auto: create-drop
+  #    hibernate:
+  #      ddl-auto: create-drop
   mail:
     host: smtp.naver.com
     port: 587
-    username: secret
-    password: secret
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -30,10 +30,10 @@ spring:
   cloud:
     gcp:
       credentials:
-        location: gcs/haechorom-4139b1a25e41.json
-      project-id: haechorom
+        location: ${GCP_CREDENTIALS}
+      project-id: ${GCP_PROJECT_ID}
       storage:
-        bucket: haechorom
+        bucket: ${GCP_STORAGE_BUCKET}
 logging:
   level:
     org.hibernate: DEBUG

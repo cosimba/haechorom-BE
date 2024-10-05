@@ -3,7 +3,6 @@ package com.cosimba.dive_batch.config;
 import com.cosimba.dive.domain.clean.entity.Clean;
 import com.cosimba.dive_batch.processor.DailyAverageProcessor;
 import com.cosimba.dive_batch.reader.TrashDataReader;
-import com.cosimba.dive_batch.repository.AggregateResultRepository;
 import com.cosimba.dive_batch.writer.DailyAverageWriter;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,6 @@ import org.springframework.batch.core.configuration.support.DefaultBatchConfigur
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.item.database.JpaPagingItemReader;
-import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.cosimba.dive_batch.job;
+package com.cosimba.dive_batch.domain;
 
 import com.cosimba.dive.global.entity.BaseEntity;
 import jakarta.persistence.*;

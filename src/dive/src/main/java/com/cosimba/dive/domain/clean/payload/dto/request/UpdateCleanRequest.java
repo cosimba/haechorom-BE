@@ -12,6 +12,8 @@ public record UpdateCleanRequest(
         String coastName,
         double lat,
         double lng,
+        String foreImg,
+        String cleanImg,
         Integer coastLength,
         Integer collectBag,
         Integer collectVal,
