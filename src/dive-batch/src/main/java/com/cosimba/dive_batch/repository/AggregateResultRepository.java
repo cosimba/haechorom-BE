@@ -1,6 +1,6 @@
 package com.cosimba.dive_batch.repository;
 
-import com.cosimba.dive_batch.job.AggregatedResult;
+import com.cosimba.dive_batch.domain.AggregatedResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -30,7 +30,8 @@ public class SecurityConfig { // Spring Security 설정을 통해 JWT 토큰 기
         http
                 .csrf(csrf -> csrf.disable())  // CSRF 비활성화
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/auth/**").permitAll()  // 회원가입, 로그인은 누구나 접근 가능
+                        .requestMatchers("/user/auth/**").permitAll()// 회원가입, 로그인은 누구나 접근 가능
+                        .requestMatchers("**").permitAll()// 테스트용
                         .anyRequest().authenticated()  // 나머지 요청은 인증 필요
                 )
                 .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);  // JWT 필터 추가

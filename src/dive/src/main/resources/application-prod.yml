@@ -27,6 +27,13 @@ spring:
             enable: true
             required: true
         default-encoding: UTF-8
+  cloud:
+    gcp:
+      credentials:
+        location: ${GCP_CREDENTIALS}
+      project-id: ${GCP_PROJECT_ID}
+      storage:
+        bucket: ${GCP_STORAGE_BUCKET}
 logging:
   level:
     org.hibernate: DEBUG

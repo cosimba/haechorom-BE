@@ -60,6 +60,10 @@ dependencies {
 	// 이메일 발송
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	// google cloud storage
+	implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '2.40.1'
+
+
 }
 
 tasks.named('test') {

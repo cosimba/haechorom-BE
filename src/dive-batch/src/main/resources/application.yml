@@ -11,6 +11,13 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      url: localhost:9200
+      username: elastic
+      password: MyPw123
 #    hibernate:
 #      ddl-auto: create-drop
   batch:
@@ -18,3 +25,8 @@ spring:
       enabled: false # ?? ???? ?? ???? ??
       jdbc:
         initialize-schema: always
+server:
+  port: 8082
+logging:
+  level:
+    org.hibernate: DEBUG

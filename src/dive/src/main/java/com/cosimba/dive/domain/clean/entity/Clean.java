@@ -42,6 +42,10 @@ public class Clean extends BaseEntity {
 
     private double lng;
 
+    private String fore_img;
+
+    private String clean_img;
+
     @Column(name = "coast_length")
     private Integer coastLength;
 
@@ -58,7 +62,8 @@ public class Clean extends BaseEntity {
     private CleanStatus cleanStatus;
 
     public static Clean create(String cleanName, String serialNum, Long josaId, LocalDateTime cleanDate,
-                               String coastName, double lat, double lng, Integer coastLength,
+                               String coastName, double lat, double lng, String fore_img, String clean_img,
+                               Integer coastLength,
                                Integer collectBag, Integer collectVal, TrashType trashType,
                                CleanStatus cleanStatus) {
         return Clean.builder()
@@ -69,6 +74,8 @@ public class Clean extends BaseEntity {
                 .coastName(coastName)
                 .lat(lat)
                 .lng(lng)
+                .fore_img(fore_img)
+                .clean_img(clean_img)
                 .coastLength(coastLength)
                 .collectBag(collectBag)
                 .collectVal(collectVal)
@@ -77,17 +84,25 @@ public class Clean extends BaseEntity {
                 .build();
     }
 
-    public void update(String cleanName, String serialNum, LocalDateTime cleanDate, String coastName, double lat, double lng, Integer coastLength, Integer collectBag, Integer collectVal, TrashType trashType, CleanStatus cleanStatus) {
+    public void update(String cleanName, String serialNum, LocalDateTime cleanDate, String coastName,
+                       double lat, double lng, String fore_img, String clean_img, Integer coastLength,
+                       Integer collectBag, Integer collectVal, TrashType trashType, CleanStatus cleanStatus) {
         this.cleanName = cleanName;
         this.serialNum = serialNum;
         this.cleanDate = cleanDate;
         this.coastName = coastName;
         this.lat = lat;
         this.lng = lng;
+        this.fore_img = fore_img;
+        this.clean_img = clean_img;
         this.coastLength = coastLength;
         this.collectBag = collectBag;
         this.collectVal = collectVal;
         this.trashType = trashType;
         this.cleanStatus = cleanStatus;
+    }
+
+    public void finish() {
+        this.cleanStatus = CleanStatus.CLEAN;
     }
 }

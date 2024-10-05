@@ -27,6 +27,13 @@ spring:
             enable: true
             required: true
         default-encoding: UTF-8
+  cloud:
+    gcp:
+      credentials:
+        location: gcs/haechorom-4139b1a25e41.json
+      project-id: haechorom
+      storage:
+        bucket: haechorom
 logging:
   level:
     org.hibernate: DEBUG

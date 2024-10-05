@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/clean/api/v1")
 @RequiredArgsConstructor
-@Validated
 public class CleanController {
 
     private final CleanService cleanService;
@@ -36,9 +37,35 @@ public class CleanController {
         );
     }
 
+    @GetMapping("/view/cleanyet")
+    public ResponseEntity<List<CleanPostReponse>> viewCleanYetList(){
+        return ResponseEntity.ok(
+                cleanService.viewCleanYetList()
+        );
+    }
+
+    @GetMapping("/view/cleanfin")
+    public ResponseEntity<List<CleanPostReponse>> viewCleanFinList(){
+        return ResponseEntity.ok(
+                cleanService.viewCleanFinList()
+        );
+    }
+
     @DeleteMapping("/{cleanId}")
     public ResponseEntity<Void> deleteClean(@PathVariable Long cleanId) {
         cleanService.deleteClean(cleanId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/finish/{cleanId}")
+    public ResponseEntity<Void> finishClean(@PathVariable Long cleanId) {
+        cleanService.finishClean(cleanId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/fintransit/{cleanId}")
+    public ResponseEntity<Void> finishTransit(@PathVariable Long cleanId) {
+        cleanService.finishTransit(cleanId);
         return ResponseEntity.ok().build();
     }
 }

@@ -57,4 +57,6 @@ public class JosaController {
         josaService.deleteJosa(id);
         return ResponseEntity.ok().build();
     }
+
+
 }

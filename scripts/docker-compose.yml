@@ -16,7 +16,8 @@ services:
       - dive-network
     volumes:
       - ./mysql-init.d/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./mysql-init.d/clean_data.csv:/var/lib/mysql-files/data.csv
+      - ./mysql-init.d/clean_data.csv:/var/lib/mysql-files/data-1.csv
+      - ./mysql-init.d/josa_data.csv:/var/lib/mysql-files/data-2.csv
   dive-adminer:
     image: adminer:latest
     container_name: dive-adminer
@@ -33,6 +34,61 @@ services:
       - "6379:6379"
     networks:
       - dive-network
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2-arm64
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./elasticsearch:/usr/share/elasticsearch/data:rw
+    # Elastic search 계정정보
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      discovery.type: single-node
+      ELASTIC_USERNAME: "elastic"
+      ELASTIC_PASSWORD: "MyPw123"
+    networks:
+      - elk
+    command: >
+      bash -c "
+      bin/elasticsearch-plugin install analysis-nori;
+      exec /usr/local/bin/docker-entrypoint.sh "
+
+  # Logstash 설정
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    platform: linux/amd64
+    ports:
+      - 5000:5000
+      - 9600:9600
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+  # Kibana 설정
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana-oss:7.9.3
+    platform: linux/amd64
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - elk
+
 networks:
   dive-network:
+    driver: bridge
+  elk:
     driver: bridge

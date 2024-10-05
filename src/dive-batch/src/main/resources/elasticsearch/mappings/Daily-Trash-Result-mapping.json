@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "coastalName": {
+      "type": "text"
+    },
+    "totalCollected": {
+      "type": "double"
+    },
+    "averageVal": {
+      "type": "double"
+    },
+    "createdAt": {
+      "type": "date",
+      "format": "uuuu-MM-dd'T'HH:mm:ss.SSS||epoch_millis"
+    }
+  }
+}
