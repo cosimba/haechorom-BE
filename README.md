@@ -18,7 +18,7 @@
 ---
 
 ## Server Configuration
-<img width="920" alt="KakaoTalk_20241006_082825534" src="https://github.com/user-attachments/assets/c63c512a-fb5f-40d8-9bd4-d92d9d47c3da">
+<img width="920" alt="KakaoTalk_20241006_082825534" src="https://github.com/user-attachments/assets/615bed25-32df-45ca-8c02-b6d1d87df906">
 
 ---
 
